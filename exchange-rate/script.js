@@ -13,7 +13,26 @@ currencyEl_one.addEventListener("change", calculate);
 amountEl_one.addEventListener("input", calculate);
 currencyEl_two.addEventListener("change", calculate);
 amountEl_two.addEventListener("input", calculate);
+swap.addEventListener("click", () => {
+  const temp = currencyEl_one.value;
+  currencyEl_one.value = currencyEl_two.value;
+  currencyEl_two.value = temp;
+  calculate();
+});
 
 function calculate() {
-  calculate();
+  const currency_one = currencyEl_one.value;
+  const currency_two = currencyEl_two.value;
+
+  fetch(
+    `https://v6.exchangerate-api.com/v6/55958985c4056f5d86c7a79c/latest/${currency_one}`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const rate = data.conversion_rates[currency_two];
+      rateEl.innerHTML = `1 ${currency_one} = ${rate} ${currency_two}`;
+      amountEl_two.value = (amountEl_one.value * rate).toFixed(2);
+    });
 }
+
+calculate();
