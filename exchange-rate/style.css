@@ -32,6 +32,7 @@ p {
   border-radius: 5px;
   font-size: 12px;
   padding: 5px 12px;
+  border-color: transparent;
 }
 
 .money-img {
@@ -55,4 +56,35 @@ p {
   background-position: right 10px top 45%, 0, 0;
   background-repeat: no-repeat;
   background-size: 12px auto, 100%;
+}
+
+.currency input {
+  border: 0;
+  background-color: transparent;
+  font-size: 30px;
+  text-align: right;
+}
+
+.swap-rate-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rate {
+  color: var(--primary-color);
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+select:focus,
+input:focus,
+button:focus {
+  outline: 0;
+}
+
+@media (max-width: 600px) {
+  .currency input {
+    width: 200px;
+  }
 }
