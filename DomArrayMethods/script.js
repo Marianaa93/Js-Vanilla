@@ -6,6 +6,12 @@ const sortBtn = document.getElementById("sort");
 const calculateWealthBtn = document.getElementById("calculate-wealth");
 
 let data = [];
+getRandomUser();
+function addData(obj) {
+  data.push(obj);
+
+  updateDOM();
+}
 
 async function getRandomUser() {
   const res = await fetch("http://randomuser.me/api");
@@ -20,12 +26,6 @@ async function getRandomUser() {
 
   addData(newUser);
   console.log(newUser);
-}
-
-function addData(obj) {
-  data.push(obj);
-
-  updateDOM();
 }
 
 function updateDOM(providedData = data) {
@@ -45,4 +45,18 @@ function updateDOM(providedData = data) {
   });
 }
 
+function doubleMoney() {
+  data = data.map((user) => {
+    return { ...user, money: user.money * 2 };
+  });
+  updateDOM();
+}
+
+function sortByRichest() {
+  data.sort((a, b) => b.money - a.money);
+  updateDOM();
+}
+
 addUserBtn.addEventListener("click", getRandomUser);
+doubleBtn.addEventListener("click", doubleMoney);
+sortBtn.addEventListener("click", sortByRichest);
