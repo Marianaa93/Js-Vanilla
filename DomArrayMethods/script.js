@@ -7,6 +7,8 @@ const calculateWealthBtn = document.getElementById("calculate-wealth");
 
 let data = [];
 getRandomUser();
+getRandomUser();
+getRandomUser();
 function addData(obj) {
   data.push(obj);
 
@@ -57,6 +59,11 @@ function sortByRichest() {
   updateDOM();
 }
 
+function filterOnlyMillionaire() {
+  data = data.filter((user) => user.money >= 1000000);
+  updateDOM();
+}
 addUserBtn.addEventListener("click", getRandomUser);
 doubleBtn.addEventListener("click", doubleMoney);
 sortBtn.addEventListener("click", sortByRichest);
+showMilionairesBtn.addEventListener("click", filterOnlyMillionaire);
