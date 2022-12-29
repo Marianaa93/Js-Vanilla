@@ -4,7 +4,6 @@ const doubleBtn = document.getElementById("double");
 const showMilionairesBtn = document.getElementById("show-millionaires");
 const sortBtn = document.getElementById("sort");
 const calculateWealthBtn = document.getElementById("calculate-wealth");
-const btnApi = document.getElementById("fetchApi");
 
 let data = [];
 
@@ -30,11 +29,18 @@ function addData(obj) {
 }
 
 function updateDOM(providedData = data) {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   main.innerHTML = "<h2><strong>Person</strong>Wealth</h2>";
   providedData.forEach((item) => {
     const element = document.createElement("div");
     element.classList.add("person");
-    element.innerHTML = `<strong>${item.name}</strong>${item.money}`;
+    element.innerHTML = `<strong>${item.name}</strong>${formatter.format(
+      item.money
+    )}`;
     main.appendChild(element);
   });
 }
